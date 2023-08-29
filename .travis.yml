@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t alvete/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run alvete/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t alvete/complexcalc-client ./client
+  - docker build -t alvete/complexcalc-nginx ./nginx
+  - docker build -t alvete/complexcalc-server ./server
+  - docker build -t alvete/complexcalc-worker ./worker 
