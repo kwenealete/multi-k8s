@@ -13,3 +13,16 @@ after_success:
   - docker build -t alvete/complexcalc-nginx ./nginx
   - docker build -t alvete/complexcalc-server ./server
   - docker build -t alvete/complexcalc-worker ./worker 
+
+  #login to the docker CLI
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  #Take those images and push them to docker hub
+  - docker push alvete/complexcalc-client
+  - docker push alvete/complexcalc-nginx
+  - docker push alvete/complexcalc-server
+  - docker push alvete/complexcalc-worker
+  -
+  -
+  -
