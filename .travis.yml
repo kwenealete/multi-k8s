@@ -22,6 +22,15 @@ after_success:
   - docker push kalvete/complexcalc-nginx
   - docker push kalvete/complexcalc-server
   - docker push kalvete/complexcalc-worker
-  -
-  -
-  -
+  
+deploy:
+  provider: 'elasticbeanstalk'
+  region: 'eu-north-1'
+  app: 'complexcalc'
+  env: 'Complexcalc-env'
+  bucket_name: 'elasticbeanstalk-eu-north-1-493739114887'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
